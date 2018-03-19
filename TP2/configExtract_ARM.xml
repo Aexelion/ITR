@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<CONFIGURATION>
+
+<TARGET NAME="ARM" ENDIANNESS="LITTLE"/>
+
+<!-- Compiler toolchain -->
+<!-- ****************** -->
+
+<!-- Objdump (called with options -t -d -z ) -->
+<OBJDUMP NAME="arm-elf-objdump" OPT=""/>
+<!-- Readelf (called with option -S) -->
+<READELF NAME="arm-elf-readelf" OPT=""/>
+
+<!-- Directories of inputs, temporaries and outputs (default values . /tmp and .) -->
+<!-- **************************************************************************** -->
+<INPUTDIR NAME="."/>
+<TMPDIR NAME="/tmp"/>
+<RESULTDIR NAME="."/>
+
+<!-- Program parameters 
+NAME: program name, used as a file name prefix when generating outputs in RESULTDIR 
+ENTRYPOINT: the first function to be called in user space, usually the "main" function 
+SOURCEFILE NAME: should point to the exe file. (merged with INPUTDIR to load file) 
+SOURCEFILE TYPE: BINARY ; only binary is available for students 
+ANNOTATIONFILE: input file defining flow information. (merged with INPUTDIR to load file) -->
+
+<PROGRAM NAME = "TP2_exe" ENTRYPOINT = "main" >
+  <SOURCEFILE NAME="TP2_exe" TYPE="BINARY" ANNOTATIONFILE = "TP2_exe-annot.xml" />
+</PROGRAM>
+
+</CONFIGURATION>

@@ -1,0 +1,182 @@
+<?xml version="1.0" ?>
+<ANNOT>
+<CFG name="getDistance">
+	<LOOP maxiter="95 "/>
+</CFG>
+<CFG name="ecrobot_poll_nxtstate">
+	<LOOP maxiter="51 "/>
+</CFG>
+<CFG name="send_bt_command">
+	<LOOP maxiter="37 "/>
+</CFG>
+<CFG name="aic_initialise">
+	<LOOP maxiter="7 "/>
+</CFG>
+<CFG name="nxt_avr_start_send">
+	<LOOP maxiter="76 "/>
+</CFG>
+<CFG name="nxt_avr_unpack">
+	<LOOP maxiter="33 "/>
+</CFG>
+<CFG name="i2c_timer_isr_C_function">
+	<LOOP maxiter="69 "/>
+</CFG>
+<CFG name="i2c_init">
+	<LOOP maxiter="78 "/>
+</CFG>
+<CFG name="systick_wait_ns">
+	<LOOP maxiter="96 "/>
+</CFG>
+<CFG name="nxt_motor_1kHz_process">
+	<LOOP maxiter="99 "/>
+</CFG>
+<CFG name="nxt_motor_init">
+	<LOOP maxiter="92 "/>
+</CFG>
+<CFG name="bt_isr_C_function">
+	<LOOP maxiter="15 "/>
+</CFG>
+<CFG name="display_char">
+	<LOOP maxiter="90 "/>
+</CFG>
+<CFG name="display_string">
+	<LOOP maxiter="100 "/>
+</CFG>
+<CFG name="display_hex">
+	<LOOP maxiter="55 "/>
+	<LOOP maxiter="37 "/>
+</CFG>
+<CFG name="display_unsigned_worker">
+	<LOOP maxiter="81 "/>
+	<LOOP maxiter="75 "/>
+</CFG>
+<CFG name="init_sensors">
+	<LOOP maxiter="78 "/>
+</CFG>
+<CFG name="twi_reset">
+	<LOOP maxiter="84 "/>
+</CFG>
+<CFG name="nxt_lcd_force_update">
+	<LOOP maxiter="55 "/>
+</CFG>
+<CFG name="nxt_spi_write">
+	<LOOP maxiter="51 "/>
+</CFG>
+<CFG name="memcpy">
+	<LOOP maxiter="63 "/>
+	<LOOP maxiter="51 "/>
+	<LOOP maxiter="3 "/>
+</CFG>
+<CFG name="memset">
+	<LOOP maxiter="76 "/>
+	<LOOP maxiter="30 "/>
+	<LOOP maxiter="55 "/>
+	<LOOP maxiter="74 "/>
+	<LOOP maxiter="93 "/>
+</CFG>
+<CFG name="tpl_insert_time_obj">
+	<LOOP maxiter="88 "/>
+</CFG>
+<CFG name="tpl_remove_timeobj_set">
+	<LOOP maxiter="36 "/>
+</CFG>
+<CFG name="tpl_get_proc">
+	<LOOP maxiter="78 "/>
+</CFG>
+<CFG name="tpl_init_os">
+	<LOOP maxiter="13 "/>
+	<LOOP maxiter="64 "/>
+</CFG>
+<CFG name="tpl_shutdown">
+	<LOOP maxiter="80 "/>
+	<ATTRS_LIST>
+		<ATTR type="integer" name="ExWCET" value="5079" />
+	</ATTRS_LIST>
+</CFG>
+<CFG name="spi_set_mode">
+	<LOOP maxiter="9 "/>
+</CFG>
+<CFG name="tpl_release_all_resources">
+	<LOOP maxiter="53 "/>
+</CFG>
+<CFG name="exception_catch_display">
+	<ATTRS_LIST>
+		<ATTR type="integer" name="ExWCET" value="754" />
+	</ATTRS_LIST>
+</CFG>
+<CFG name="strlen">
+	<ATTRS_LIST>
+		<ATTR type="integer" name="ExWCET" value="3042" />
+	</ATTRS_LIST>
+</CFG>
+<CFG name="systick_wait_ms">
+	<ATTRS_LIST>
+		<ATTR type="integer" name="ExWCET" value="10000" />
+	</ATTRS_LIST>
+</CFG>
+<CFG name="tpl_shutdown">
+	<ATTRS_LIST>
+		<ATTR type="integer" name="ExWCET" value="5079" />
+	</ATTRS_LIST>
+</CFG>
+<ALIAS cfgname="ActivateTask" target="tpl_activate_task_service" />
+<ALIAS cfgname="TerminateTask" target="tpl_terminate_task_service" />
+<ALIAS cfgname="ChainTask" target="tpl_chain_task_service" />
+<ALIAS cfgname="Schedule" target="tpl_schedule_service" />
+<ALIAS cfgname="GetTaskID" target="tpl_get_task_id_service" />
+<ALIAS cfgname="GetTaskState" target="tpl_get_task_state_service" />
+<ALIAS cfgname="EnableAllInterrupts" target="tpl_enable_all_interrupts_service" />
+<ALIAS cfgname="DisableAllInterrupts" target="tpl_disable_all_interrupts_service" />
+<ALIAS cfgname="ResumeAllInterrupts" target="tpl_resume_all_interrupts_service" />
+<ALIAS cfgname="SuspendAllInterrupts" target="tpl_suspend_all_interrupts_service" />
+<ALIAS cfgname="ResumeOSInterrupts" target="tpl_resume_os_interrupts_service" />
+<ALIAS cfgname="SuspendOSInterrupts" target="tpl_suspend_os_interrupts_service" />
+<ALIAS cfgname="GetResource" target="tpl_get_resource_service" />
+<ALIAS cfgname="ReleaseResource" target="tpl_release_resource_service" />
+<ALIAS cfgname="SetEvent" target="tpl_set_event_service" />
+<ALIAS cfgname="ClearEvent" target="tpl_clear_event_service" />
+<ALIAS cfgname="GetEvent" target="tpl_get_event_service" />
+<ALIAS cfgname="WaitEvent" target="tpl_wait_event_service" />
+<ALIAS cfgname="GetAlarmBase" target="tpl_get_alarm_base_service" />
+<ALIAS cfgname="GetAlarm" target="tpl_get_alarm_service" />
+<ALIAS cfgname="SetRelAlarm" target="tpl_set_rel_alarm_service" />
+<ALIAS cfgname="SetAbsAlarm" target="tpl_set_abs_alarm_service" />
+<ALIAS cfgname="CancelAlarm" target="tpl_cancel_alarm_service" />
+<ALIAS cfgname="GetActiveApplicationMode" target="tpl_get_active_application_mode_service" />
+<ALIAS cfgname="tpl_start_os" target="tpl_start_os_service" />
+<ALIAS cfgname="ShutdownOS" target="tpl_shutdown_os_service" />
+<ALIAS cfgname="CallTerminateTask" target="tpl_call_terminate_task_service" />
+<ALIAS cfgname="CallTerminateISR2" target="tpl_call_terminate_isr2_service" />
+<ALIAS cfgname="StartCOM" target="tpl_start_com_service" />
+<ALIAS cfgname="StopCOM" target="tpl_stop_com_service" />
+<ALIAS cfgname="GetCOMApplicationMode" target="tpl_get_com_application_mode_service" />
+<ALIAS cfgname="InitMessage" target="tpl_init_message_service" />
+<ALIAS cfgname="StartPeriodic" target="tpl_start_periodic_service" />
+<ALIAS cfgname="StopPeriodic" target="tpl_stop_periodic_service" />
+<ALIAS cfgname="SendMessage" target="tpl_send_message_service" />
+<ALIAS cfgname="ReceiveMessage" target="tpl_receive_message_service" />
+<ALIAS cfgname="SendDynamicMessage" target="tpl_send_dynamic_message_service" />
+<ALIAS cfgname="ReceiveDynamicMessage" target="tpl_receive_dynamic_message_service" />
+<ALIAS cfgname="SendZeroMessage" target="tpl_send_zero_message_service" />
+<ALIAS cfgname="GetMessageStatus" target="tpl_get_message_status_service" />
+<ALIAS cfgname="GetISRID" target="tpl_get_isr_id_service" />
+<ALIAS cfgname="IncrementCounter" target="tpl_increment_counter_service" />
+<ALIAS cfgname="GetCounterValue" target="tpl_get_counter_value_service" />
+<ALIAS cfgname="GetElapsedCounterValue" target="tpl_get_elapsed_counter_value_service" />
+<ALIAS cfgname="StartScheduleTableRel" target="tpl_start_schedule_table_rel_service" />
+<ALIAS cfgname="StartScheduleTableAbs" target="tpl_start_schedule_table_abs_service" />
+<ALIAS cfgname="StopScheduleTable" target="tpl_stop_schedule_table_service" />
+<ALIAS cfgname="NextScheduleTable" target="tpl_next_schedule_table_service" />
+<ALIAS cfgname="GetScheduleTableStatus" target="tpl_get_schedule_table_status_service" />
+<ALIAS cfgname="StartScheduleTableSynchron" target="tpl_start_schedule_table_synchron_service" />
+<ALIAS cfgname="SyncScheduleTable" target="tpl_sync_schedule_table_service" />
+<ALIAS cfgname="SetScheduleTableAsync" target="tpl_set_schedule_table_async_service" />
+<ALIAS cfgname="GetApplicationID" target="tpl_get_application_id_service" />
+<ALIAS cfgname="TerminateApplication" target="tpl_terminate_application_service" />
+<ALIAS cfgname="CheckISRMemoryAccess" target="tpl_check_isr_memory_access_service" />
+<ALIAS cfgname="CheckTaskMemoryAccess" target="tpl_check_task_memory_access_service" />
+<ALIAS cfgname="CheckObjectAccess" target="tpl_check_object_access_service" />
+<ALIAS cfgname="CheckObjectOwnership" target="tpl_check_object_ownership_service" />
+<ALIAS cfgname="CallTrustedFunction" target="tpl_call_trusted_function_service" />
+<ALIAS cfgname="ExitTrustedFunction" target="tpl_exit_trusted_function_service" />
+</ANNOT>

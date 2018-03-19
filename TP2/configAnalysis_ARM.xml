@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE CONFIGURATION SYSTEM "config.dtd"> 
+
+<CONFIGURATION>
+
+<!-- ******************************************************* -->
+
+<!-- Places to be modified to adap the template to your need -->
+<!-- Mandatory: -->
+<!--    Inputputdir: directory in which all files will be read/written -->
+<!--    input file name for the first analysis (here icache analysis): name of thexml file containing the program to be analyzed -->
+<!--    If data address analysis is applied, name of the benchmark -->
+<!--    If codeline analysis is applied, name of the program binary file -->
+<!--    If htmlprint is applied, absolute name of the html file  -->
+<!-- Optional: -->
+<!--    Architecture description -->
+<!--    List of analyses to be applied and corresponding parameters -->
+
+<!-- ******************************************************* -->
+
+<!-- Where to find the program to analyze and to put analysis results -->
+<INPUTOUTPUTDIR name="./"/>
+
+<!-- Architecture description -->
+<ARCHITECTURE>
+
+<!-- Target type -->
+<TARGET NAME="ARM" ENDIANNESS="LITTLE"/>
+
+<!-- Cache -->
+<!-- NB: cache look-up is always considered when calculating the WCET. -->
+<!-- 111 for a all-miss for a 2-level cache hierarchy -->
+<!-- Set type="picache" for a perfect instruction cache, and type="pdcache" for a perfect data cache.
+     In this cases, nbsets, nbways, cachelinesize and replacement policy are irrelevant.  -->
+<MEMORY load_latency="100" store_latency="100"/>
+
+</ARCHITECTURE>
+<!-- List of analysis steps, to be applied sequentially -->
+<!-- output file allows to keep the results of on analysis in a file for debug purposes -->
+<ANALYSIS>
+
+<!-- Build the cfg of the input_file, compute the contexts and set the entry point to be analyzed -->
+<ENTRYPOINT keepresults="on" input_file ="TP2_exe.xml" output_file ="" entrypointname="main"/>
+
+
+
+<!-- Final WCET computation.
+fun_detailed: ask for the WCET of each function/CFG, not just the entrypoint
+keepresults, output_file, attach_WCET_info : will enable the analyser to create a file with the WCET information 
+fun_detailed: will enable each function to have its own WCET (not just the entrypoint) 
+generate_note_req, solver, pipeline: are meant to set-up the solving phase
+-->
+<IPET keepresults="on" 
+      input_file ="" output_file ="TP2_exe-res.xml" 
+      solver = "cplex" 
+      pipeline= "off"
+      attach_WCET_info = "on"
+      generate_node_freq = "on"
+      fun_detailed="on"
+/>
+</ANALYSIS>
+</CONFIGURATION>
