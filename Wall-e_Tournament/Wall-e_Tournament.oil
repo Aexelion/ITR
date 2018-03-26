@@ -1,0 +1,149 @@
+/**
+ * @file Wall-e_Tournament.oil
+ *
+ * @section desc File description
+ *
+ * @section copyright Copyright
+ *
+ * @section infos File informations
+ *
+ */
+OIL_VERSION = "2.5" : "test" ;
+
+IMPLEMENTATION trampoline {
+    TASK {
+        UINT32 STACKSIZE = 500 ;
+        UINT32 PRIORITY = 1 ;
+    } ;
+    ISR {
+        UINT32 STACKSIZE = 500 ;
+    } ;
+};
+
+CPU test {
+
+	OS config {
+		STATUS = EXTENDED;
+		ERRORHOOK = FALSE;
+		PRETASKHOOK = TRUE;
+        POSTTASKHOOK = TRUE;
+        STARTUPHOOK = TRUE;
+		APP_SRC = "Wall-e_Tournament.c"; 
+		APP_NAME = "Wall-e_Tournament_exe";
+		TRAMPOLINE_BASE_PATH = "/share/m1info/ITR/osek_env/trampoline/";
+		CFLAGS = "-c -ffreestanding -fsigned-char -mcpu=arm7tdmi -O0 -Winline -Wall -Werror-implicit-function-declaration --param max-inline-insns-single=1000 -ffunction-sections -fdata-sections -std=gnu99";
+		ASFLAGS = "-mcpu=arm7tdmi --fatal-warnings ";
+		LDFLAGS = "--cref --allow-multiple-definition --gc-sections";
+		LDFLAGS = "-L/share/m1info/ITR/osek_env/arm-elf//lib/gcc/arm-elf/4.5.1/ -lgcc -L/share/m1info/ITR/osek_env/arm-elf//arm-elf/lib -lc";
+		SYSTEM_CALL = TRUE;
+		
+		COMPILER = "arm-elf-gcc";
+		ASSEMBLER = "arm-elf-as";
+		LINKER = "arm-elf-ld";
+		MEMMAP = TRUE{
+		  COMPILER = gcc;
+		  LINKER = gnu_ld { SCRIPT = "script.ld"; };
+		  ASSEMBLER = gnu_as;
+		  MEMORY_PROTECTION = FALSE;
+		};
+	} ;
+
+	APPMODE std {
+	};  
+
+	COUNTER SystemCounter {
+	  SOURCE = it_timer1;
+	  MAXALLOWEDVALUE = 2000;
+	  TICKSPERBASE = 1;
+	  MINCYCLE = 1; 
+	};
+
+	ISR isr_button_start {
+	   CATEGORY = 2;
+		PRIORITY = 1;
+		SOURCE = button_start;
+	};
+
+	ISR isr_button_stop {
+	   CATEGORY = 2;
+		PRIORITY = 1;
+		SOURCE = button_stop;
+	};
+
+	ISR isr_button_left {
+	   CATEGORY = 2;
+		PRIORITY = 1;
+		SOURCE = button_left;
+	};
+
+	ISR isr_button_right {
+	   CATEGORY = 2;
+		PRIORITY = 1;
+		SOURCE = button_right;
+	};
+   
+	TASK Detection_contact {
+		PRIORITY = 1;
+		AUTOSTART = TRUE { APPMODE = std; };
+		ACTIVATION = 1;
+		SCHEDULE = FULL;
+	};
+	
+	TASK Detection_distance {
+		PRIORITY = 1;
+		AUTOSTART = TRUE { APPMODE = std; };
+		ACTIVATION = 2;
+		SCHEDULE = FULL;
+	};
+	
+	TASK Navigation {
+		PRIORITY = 1;
+		AUTOSTART = TRUE { APPMODE = std; };
+		ACTIVATION = 1;
+		SCHEDULE = FULL;
+	};
+	
+	ALARM AlarmContact {
+
+	COUNTER = SystemCounter;
+	ACTION = ACTIVATETASK {
+	TASK = Detection_contact;
+	};
+	
+	AUTOSTART = TRUE {
+	ALARMTIME = 100;
+	CYCLETIME = 100;
+	APPMODE = std;
+	};
+	};
+
+	ALARM AlarmDistance {
+
+	COUNTER = SystemCounter;
+	ACTION = ACTIVATETASK {
+	TASK = Detection_distance;
+	};
+	AUTOSTART = TRUE {
+	ALARMTIME = 100;
+	CYCLETIME = 300;
+	APPMODE = std;
+	};
+	};
+	
+	ALARM AlarmNavigation {
+
+	COUNTER = SystemCounter;
+	ACTION = ACTIVATETASK {
+	TASK = Navigation;
+	};
+	AUTOSTART = TRUE {
+	ALARMTIME = 100;
+	CYCLETIME = 200;
+	APPMODE = std;
+	};
+	};
+	
+};
+
+/* End of file nxt_simple.oil */
+
