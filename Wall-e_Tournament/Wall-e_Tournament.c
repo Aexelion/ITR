@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SEUIL 15
+#define SEUIL 22
 #define SEUIL2 30
 
 #define RECULER 1
@@ -30,6 +30,7 @@
 #define AVANCER 3
 #define POSITION 4
 #define STOP 5
+#define DEBUT 6
 
 #define Capteur_Contact_Gauche NXT_PORT_S3
 #define Capteur_Contact_Droit NXT_PORT_S1
@@ -44,7 +45,8 @@
 int mutexDist=1;
 int distance=1;
 
-int ordre=AVANCER;
+int ordre=DEBUT;
+int compteur_debut=0;
 int compteur_Recule=0;
 int compteur_Position=0;
 int compteur_Tourner=0;
@@ -118,8 +120,13 @@ TASK(Detection_distance)
 			ordre = POSITION;
 		}
 	}
-	if (ordre == TOURNER){
+	if (ordre == TOURNER && compteur_Tourner >= 0){
 		if (distance >= SEUIL2){
+			ordre = AVANCER;
+		}
+	}
+	if (ordre == DEBUT && compteur_debut >= 10) {
+		if (distance >= SEUIL2) {
 			ordre = AVANCER;
 		}
 	}
@@ -143,7 +150,7 @@ TASK(Navigation)
 		compteur_Recule++;
 		if (compteur_Recule >= 5){
 			compteur_Recule = 0;
-			compteur_Tourner = 0;
+			compteur_Tourner = -2;
 			ordre = TOURNER;
 		}
 	}else if (ordre == TOURNER) {
@@ -161,29 +168,27 @@ TASK(Navigation)
 			nxt_motor_set_speed(Moteur_Droit, VITESSE, 0);
 		}
 		compteur_Tourner++;
-		if (compteur_Tourner >= 20) {
+		if (compteur_Tourner >= 23) {
 			ordre = STOP;
 		}
 	}else if (ordre == POSITION) {
 		display_goto_xy(0,0);
 		display_string("Je me positionne");
 		if (gauche){
-			display_string(" a droite      ");
-			display_update();
-			nxt_motor_set_speed(Moteur_Gauche, VITESSE, 0);
-			nxt_motor_set_speed(Moteur_Droit, -VITESSE, 0);
-		}else{
 			display_string(" a gauche      ");
 			display_update();
 			nxt_motor_set_speed(Moteur_Gauche, -VITESSE, 0);
 			nxt_motor_set_speed(Moteur_Droit, VITESSE, 0);
+		}else{
+			display_string(" a droite      ");
+			display_update();
+			nxt_motor_set_speed(Moteur_Gauche, VITESSE, 0);
+			nxt_motor_set_speed(Moteur_Droit, -VITESSE, 0);
 		}
 		compteur_Position++;
-		if (compteur_Position >= 10){
+		if (compteur_Position >= 12){
 			compteur_Position = 0;
 			compteur_Tourner = 0;
-			if (gauche){gauche = 0;}
-			else{gauche = 1;}
 			ordre = TOURNER;
 		}
 	}else if(ordre == STOP) {
@@ -192,6 +197,12 @@ TASK(Navigation)
 		display_update();
 		nxt_motor_set_speed(Moteur_Gauche, 0, 0);
 		nxt_motor_set_speed(Moteur_Droit, 0, 0);
+	}else if(ordre == DEBUT) {
+		display_goto_xy(0,0);
+		display_string("C'est le debut");
+		nxt_motor_set_speed(Moteur_Gauche, VITESSE, 0);
+		nxt_motor_set_speed(Moteur_Droit, -VITESSE, 0);
+		compteur_debut++;
 	}
 }
 
