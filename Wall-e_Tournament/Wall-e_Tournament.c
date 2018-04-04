@@ -22,8 +22,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SEUIL 22
-#define SEUIL2 30
+#define SEUIL 25
+#define SEUIL2 45 
 
 #define RECULER 1
 #define TOURNER 2
