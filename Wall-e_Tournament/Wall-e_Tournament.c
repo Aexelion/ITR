@@ -24,6 +24,7 @@
 
 #define SEUIL 25
 #define SEUIL2 40
+#define Max_Tourner 23
 
 #define RECULER 1
 #define TOURNER 2
@@ -168,7 +169,7 @@ TASK(Navigation)
 			nxt_motor_set_speed(Moteur_Droit, VITESSE, 0);
 		}
 		compteur_Tourner++;
-		if (compteur_Tourner >= 23) {
+		if (compteur_Tourner >= Max_Tourner) {
 			ordre = STOP;
 		}
 	}else if (ordre == POSITION) {
@@ -186,7 +187,7 @@ TASK(Navigation)
 			nxt_motor_set_speed(Moteur_Droit, -VITESSE, 0);
 		}
 		compteur_Position++;
-		if (compteur_Position >= 12){
+		if (compteur_Position >= Max_Tourner/2){
 			compteur_Position = 0;
 			compteur_Tourner = 0;
 			ordre = TOURNER;
