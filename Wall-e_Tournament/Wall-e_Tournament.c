@@ -23,7 +23,7 @@
 #include <stdlib.h>
 
 #define SEUIL 25
-#define SEUIL2 45 
+#define SEUIL2 40
 
 #define RECULER 1
 #define TOURNER 2
